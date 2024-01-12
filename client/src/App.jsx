@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import ContactUs from "./pages/ContactUs";
 import Sermons from "./pages/Sermons";
+import SignUp from "./pages/SignUp";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/blog-posts" element={<Blog />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/sermons" element={<Sermons />} />
+        <Route path="/sign-up" element={<SignUp />} />
         <Route element={<PrivateRoutes />}></Route>
         <Route element={<OnlyAdminPrivateRoutes />}></Route>
       </Routes>
