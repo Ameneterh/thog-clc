@@ -40,7 +40,7 @@ export default function FooterCom() {
               </div>
               <div className="text-sm text-slate-800 dark:text-slate-200">
                 <p>Email: contact.thehouseofglory@sotsm.org</p>
-                <p>Phone: +234803 0000 000</p>
+                <p>Phone: +234803 063 7978</p>
               </div>
             </div>
           </div>
@@ -56,18 +56,12 @@ export default function FooterCom() {
               </Footer.LinkGroup>
             </div>
             <div className="">
-              <Footer.Title title="Follow Starlight" />
+              <Footer.Title title="Follow The House of Glory" />
               <Footer.LinkGroup col>
                 <Footer.Link href="#">Facebook</Footer.Link>
                 <Footer.Link href="#">Twitter</Footer.Link>
                 <Footer.Link href="#">WhatsApp</Footer.Link>
-              </Footer.LinkGroup>
-            </div>
-            <div className="">
-              <Footer.Title title="Legal" />
-              <Footer.LinkGroup col>
-                <Footer.Link href="#">Privacy Policy</Footer.Link>
-                <Footer.Link href="#">Terms &amp; Conditions</Footer.Link>
+                <Footer.Link href="#">YouTube</Footer.Link>
               </Footer.LinkGroup>
             </div>
           </div>
@@ -81,10 +75,13 @@ export default function FooterCom() {
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
             <Footer.Icon
-              href="https://www.facebook.com/amenest"
+              href="https://www.facebook.com/ameneng"
               icon={BsFacebook}
             />
-            <Footer.Icon href="#" icon={BsInstagram} />
+            <Footer.Icon
+              href="https://www.instagram.com/ameneterh"
+              icon={BsInstagram}
+            />
             <Footer.Icon
               href="https://www.twitter.com/ameneterh"
               icon={BsTwitter}
