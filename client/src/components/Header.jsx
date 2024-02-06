@@ -49,7 +49,7 @@ export default function Header() {
   };
 
   return (
-    <div className="sm:static w-full z-50 relative">
+    <div className="sticky top-0 z-50 w-full">
       <div className="h-8 w-full bg-gray-600 dark:bg-slate-600"></div>
       <Navbar fluid className="border-b-2">
         <Link to="/" className="flex gap-2">
