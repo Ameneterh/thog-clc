@@ -5,12 +5,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { signOutSuccess } from "../redux/user/userSlice";
 
 export default function Header() {
   const path = useLocation().pathname;
   const location = useLocation();
-  const currentUser = true;
-  // const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -97,9 +97,7 @@ export default function Header() {
             <Dropdown
               arrowIcon={false}
               inline
-              label={
-                <Avatar alt="user" img={currentUser.profilePicture} rounded />
-              }
+              label={<Avatar alt="user" img={currentUser.avatar} rounded />}
             >
               <Dropdown.Header>
                 <span className="block text-sm">@{currentUser.username}</span>
