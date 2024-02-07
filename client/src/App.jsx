@@ -13,6 +13,7 @@ import Sermons from "./pages/Sermons";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
+import CreatePost from "./pages/CreatePost";
 
 export default function App() {
   return (
@@ -30,7 +31,9 @@ export default function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-        <Route element={<OnlyAdminPrivateRoutes />}></Route>
+        <Route element={<OnlyAdminPrivateRoutes />}>
+          <Route path="/create-post" element={<CreatePost />} />
+        </Route>
       </Routes>
       <FooterCom />
     </BrowserRouter>
