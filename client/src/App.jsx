@@ -14,6 +14,8 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
 import CreatePost from "./pages/CreatePost";
+import PostPage from "./pages/PostPage";
+import UpdatePost from "./pages/UpdatePost";
 
 export default function App() {
   return (
@@ -33,7 +35,9 @@ export default function App() {
         </Route>
         <Route element={<OnlyAdminPrivateRoutes />}>
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
+        <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <FooterCom />
     </BrowserRouter>

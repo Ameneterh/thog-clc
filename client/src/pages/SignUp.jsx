@@ -18,6 +18,7 @@ export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -93,6 +94,9 @@ export default function SignUp() {
         return setErrorMessage(data.message);
       }
       setLoading(false);
+      if (res.ok) {
+        navigate("/sign-in");
+      }
     } catch (error) {
       setErrorMessage(data.message);
       setLoading(false);
