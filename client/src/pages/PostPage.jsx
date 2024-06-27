@@ -8,12 +8,12 @@ export default function PostPage() {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [post, setPost] = useState(null);
-  const [users, setUsers] = useState([]);
+  const [post, setPost] = useState({});
+  const [postAuthor, setPostAuthor] = useState({});
   const [recentPosts, setRecentPosts] = useState(null);
 
   console.log(post);
-  console.log(users);
+  console.log(postAuthor);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -39,16 +39,16 @@ export default function PostPage() {
     };
     fetchPost();
 
-    const fetchAuthors = async () => {
-      const res = await fetch(`/api/user/getusers`);
-      const data = await res.json();
+    const fetchPostAuthor = async (userId) => {
+      const res = await fetch(`/api/user/${userId}`);
+      const author = await res.json();
       if (res.ok) {
-        setUsers(data.users);
+        setPostAuthor(author);
       }
     };
 
-    fetchAuthors();
-  }, [postSlug]);
+    fetchPostAuthor(post.userId);
+  }, [postSlug, post.userId]);
 
   if (loading)
     return (
@@ -56,14 +56,6 @@ export default function PostPage() {
         <Spinner size="xl" />
       </div>
     );
-
-  const getPostAuthor = (userId) => {
-    return users.find((author) => {
-      if (author._id === userId) {
-        return author;
-      }
-    });
-  };
 
   return (
     <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
@@ -73,23 +65,21 @@ export default function PostPage() {
       <div className="flex gap-2 items-center justify-between border-t border-slate-700 pt-2 text-sm">
         <div className="flex gap-2 items-center">
           <p>Posted by</p>
-          <p className="font-semibold">
-            @{getPostAuthor(post.userId).username}
-          </p>
+          <p className="font-semibold">@{postAuthor.username}</p>
           <Link
-            to={`mailto:${getPostAuthor(post.userId).email}`}
+            to={`mailto:${postAuthor.email}`}
             className="text-teal-700 hover:underline underline-offset-4"
           >
-            {getPostAuthor(post.userId).email}
+            {postAuthor.email}
           </Link>
         </div>
-        {/* <div className="">{new Date(post.createdAt).toLocaleDateString()}</div> */}
+        <div className="">{new Date(post.createdAt).toLocaleDateString()}</div>
       </div>
 
       <img
         src={post && post.image}
         alt={post && post.title}
-        className="mt-10 p-3 max-h-[600px] w-full object-cover"
+        className="mt-2 p-3 max-h-[600px] w-full object-cover object-top"
       />
 
       <div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-3xl text-xs">
@@ -101,7 +91,7 @@ export default function PostPage() {
 
       <div
         dangerouslySetInnerHTML={{ __html: post && post.content }}
-        className="p-3 max-w-3xl mx-auto w-full post-content"
+        className="p-3 max-w-3xl mx-auto w-full post-content text-justify"
       ></div>
 
       <CommentSection postId={post._id} />

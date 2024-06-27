@@ -1,10 +1,19 @@
-import { Alert, Button, Modal, TextInput, Textarea } from "flowbite-react";
+import {
+  Alert,
+  Button,
+  Modal,
+  Spinner,
+  TextInput,
+  Textarea,
+} from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Comment from "./Comment";
 import { useNavigate } from "react-router-dom";
+import Divider from "./Divider";
+import { FaRegComment } from "react-icons/fa";
 
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -13,6 +22,7 @@ export default function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,6 +32,7 @@ export default function CommentSection({ postId }) {
     }
 
     try {
+      setIsSubmitting(true);
       const res = await fetch("/api/comment/create", {
         method: "POST",
         headers: {
@@ -38,9 +49,11 @@ export default function CommentSection({ postId }) {
         setComment("");
         setCommentError(null);
         setComments([data, ...comments]);
+        setIsSubmitting(false);
       }
     } catch (error) {
       setCommentError(error.message);
+      setIsSubmitting(false);
     }
   };
 
@@ -118,8 +131,17 @@ export default function CommentSection({ postId }) {
 
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
+      <div className="text-sm my-5 flex items-center gap-1">
+        <FaRegComment className="text-xl mr-2" />
+        {comments.length > 0 &&
+          comments.length +
+            " " +
+            (comments.length === 1 ? "comment" : "comments")}
+      </div>
+      <Divider />
+
       {currentUser ? (
-        <div className="flex items-center gap-1 my-5text-gray-500 text-sm">
+        <div className="flex items-center gap-1 my-5text-gray-500 text-sm mt-5">
           <p>Signed in as:</p>
           <img
             className="h-5 w-5 object-cover rounded-full"
@@ -160,7 +182,14 @@ export default function CommentSection({ postId }) {
               remaining
             </p>
             <Button outline gradientDuoTone="purpleToBlue" type="submit">
-              Submit Comment
+              {isSubmitting ? (
+                <>
+                  <Spinner size="md" />
+                  <span className="pl-3">Pls, wait</span>
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </div>
           {commentError && (
@@ -174,12 +203,6 @@ export default function CommentSection({ postId }) {
         <p className="text-sm my-5">No comments yet</p>
       ) : (
         <>
-          <div className="text-sm my-5 flex items-center gap-1">
-            <p>Comments</p>
-            <div className="border border-gray-400 py-1 px-2 rounded-sm">
-              {comments.length}
-            </div>
-          </div>
           {comments.map((comment) => (
             <Comment
               key={comment._id}
