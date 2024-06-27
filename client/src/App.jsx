@@ -16,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import CreatePost from "./pages/CreatePost";
 import PostPage from "./pages/PostPage";
 import UpdatePost from "./pages/UpdatePost";
+import CreateContent from "./pages/CreateContent";
 
 export default function App() {
   return (
@@ -35,9 +36,10 @@ export default function App() {
         </Route>
         <Route element={<OnlyAdminPrivateRoutes />}>
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/create-content" element={<CreateContent />} />
           <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
-        <Route path="/post/:postSlug" element={<PostPage />} />
+        <Route path="/posts/:postSlug" element={<PostPage />} />
       </Routes>
       <FooterCom />
     </BrowserRouter>

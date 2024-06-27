@@ -20,9 +20,7 @@ export default function CreatePost() {
 
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
-
-  console.log(formData);
-  console.log(file);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -65,8 +63,9 @@ export default function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const res = await fetch("/api/post/create", {
+      const res = await fetch("/api/post/create-post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,19 +75,22 @@ export default function CreatePost() {
       const data = await res.json();
       if (!res.ok) {
         setPublishError(data.message);
+        setLoading(false);
         return;
       }
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        setLoading(false);
+        navigate(`/posts/${data.slug}`);
       }
     } catch (error) {
       setPublishError("Something went wrong");
+      setLoading(false);
     }
   };
 
   return (
-    <div className="p-3 max-w-3xl mx-auto min-h-screen mb-20">
+    <div className="p-3 max-w-3xl mx-auto mb-10">
       <h1 className="text-center text-3xl my-7 font-semibold">Create a Post</h1>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -104,31 +106,44 @@ export default function CreatePost() {
             }
           />
         </div>
-        <div className="flex gap-4 items-center justify-between border-4 border-teal-500 p-3 rounded-lg">
-          <FileInput
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-          <Button
-            type="button"
-            gradientDuoTone="purpleToBlue"
-            size="sm"
-            outline
-            onClick={handleUploadImage}
-            disabled={imageUploadProgress}
+        <div className="flex gap-4 items-center justify-between rounded-lg">
+          <div className="flex flex-1 gap-4 items-center justify-between border-2 border-teal-500 p-3 rounded-lg">
+            <FileInput
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <Button
+              type="button"
+              gradientDuoTone="purpleToBlue"
+              size="sm"
+              outline
+              onClick={handleUploadImage}
+              disabled={imageUploadProgress}
+            >
+              {imageUploadProgress ? (
+                <div className="w-16 h-16">
+                  <CircularProgressbar
+                    value={imageUploadProgress}
+                    text={`${imageUploadProgress || 0}%`}
+                  />
+                </div>
+              ) : (
+                "Upload Image"
+              )}
+            </Button>
+          </div>
+          <Select
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
           >
-            {imageUploadProgress ? (
-              <div className="w-16 h-16">
-                <CircularProgressbar
-                  value={imageUploadProgress}
-                  text={`${imageUploadProgress || 0}%`}
-                />
-              </div>
-            ) : (
-              "Upload Image"
-            )}
-          </Button>
+            <option>Select a category</option>
+            <option value="cosmetics">Cosmetics & Beauty</option>
+            <option value="drugs">Drugs & Medicines</option>
+            <option value="foods">Foods & Minerals</option>
+            <option value="others">Others</option>
+          </Select>
         </div>
 
         {imageUploadError && <Alert color="failure">{imageUploadError}</Alert>}

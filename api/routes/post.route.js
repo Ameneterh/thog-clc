@@ -1,7 +1,7 @@
 import express from "express";
 import { verifyToken } from "../utils/verifyUser.js";
 import {
-  create,
+  createPost,
   deletepost,
   getposts,
   updatepost,
@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.post("/create", verifyToken, create);
+router.post("/create-post", verifyToken, createPost);
 router.get("/getposts", getposts);
 router.delete("/deletepost/:postId/:userId", verifyToken, deletepost);
 router.put("/updatepost/:postId/:userId", verifyToken, updatepost);

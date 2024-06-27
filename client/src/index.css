@@ -7,12 +7,76 @@ body {
   font-family: "Catamaran";
 }
 
+.focus\:ring-cyan-300:focus {
+  --tw-ring-opacity: 0 !important;
+}
+
+:root {
+  font-family: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  /* background-color: #f7f7f7; */
+  font-synthesis: none;
+}
+
 .ql-editor {
   font-size: 1.05rem;
 }
 
 .post-content p {
   margin-bottom: 0.5rem;
+}
+
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+}
+
+.ql-editor {
+  font-size: 1.05rem;
+}
+
+.ql-editor p {
+  margin-bottom: 15px;
+}
+
+.post-content p {
+  margin-bottom: 15px;
+}
+
+.ql-editor ol {
+  margin-bottom: 15px;
+  margin-left: -30px;
+}
+
+.post-content ol {
+  margin-bottom: 15px;
+  margin-left: 0px;
+}
+
+.ql-editor blockquote {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.post-content blockquote {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.post-content a {
+  color: rgb(142, 142, 175);
+}
+
+.post-content a:hover {
+  opacity: 80%;
+  text-decoration: underline;
 }
 
 .post-content h1 {

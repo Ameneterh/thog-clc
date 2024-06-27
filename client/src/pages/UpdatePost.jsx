@@ -22,8 +22,11 @@ export default function UpdatePost() {
   const { postId } = useParams();
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  console.log(formData._id);
 
   useEffect(() => {
     try {
@@ -83,14 +86,11 @@ export default function UpdatePost() {
     }
   };
 
-  console.log(formData.title);
-  console.log(currentUser._id);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `/api/post/updatepost/${formData._id}/${currentUser._id}`,
+        `/api/post/updatepost/${postId}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -106,7 +106,7 @@ export default function UpdatePost() {
       }
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        navigate(`/posts/${data.slug}`);
       }
     } catch (error) {
       setPublishError("Something went wrong");
@@ -131,34 +131,51 @@ export default function UpdatePost() {
             }
           />
         </div>
-        <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 rounded-lg">
-          <FileInput
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-          <Button
-            type="button"
-            gradientDuoTone="purpleToBlue"
-            size="sm"
-            outline
-            onClick={handleUploadImage}
-            disabled={imageUploadProgress}
+        <div className="flex gap-4 items-center justify-between rounded-lg">
+          <div className="flex flex-1 gap-4 items-center justify-between border-2 border-teal-500 p-3 rounded-lg">
+            <FileInput
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <Button
+              type="button"
+              gradientDuoTone="purpleToBlue"
+              size="sm"
+              outline
+              onClick={handleUploadImage}
+              disabled={imageUploadProgress}
+            >
+              {imageUploadProgress ? (
+                <div className="w-16 h-16">
+                  <CircularProgressbar
+                    value={imageUploadProgress}
+                    text={`${imageUploadProgress || 0}%`}
+                  />
+                </div>
+              ) : (
+                "Upload Image"
+              )}
+            </Button>
+          </div>
+          <Select
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
           >
-            {imageUploadProgress ? (
-              <div className="w-16 h-16">
-                <CircularProgressbar
-                  value={imageUploadProgress}
-                  text={`${imageUploadProgress || 0}%`}
-                />
-              </div>
-            ) : (
-              "Upload Image"
-            )}
-          </Button>
+            <option>Select a category</option>
+            <option value="cosmetics">Cosmetics & Beauty</option>
+            <option value="drugs">Drugs & Medicines</option>
+            <option value="foods">Foods & Minerals</option>
+            <option value="others">Others</option>
+          </Select>
         </div>
 
         {imageUploadError && <Alert color="failure">{imageUploadError}</Alert>}
+
+        {formData.downloadfile && (
+          <Alert color="success">Upload Completed successfully</Alert>
+        )}
 
         {formData.image && (
           <img
@@ -179,8 +196,15 @@ export default function UpdatePost() {
           value={formData.content}
         />
 
-        <Button type="submit" gradientDuoTone="purpleToPink">
-          Update Post
+        <Button type="submit" gradientDuoTone="purpleToPink" disabled={loading}>
+          {loading ? (
+            <>
+              <Spinner size="sm" />
+              <span className="pl-3">Updating, please wait ...</span>
+            </>
+          ) : (
+            "Update Post"
+          )}
         </Button>
 
         {publishError && (

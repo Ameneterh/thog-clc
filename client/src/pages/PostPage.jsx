@@ -12,9 +12,6 @@ export default function PostPage() {
   const [postAuthor, setPostAuthor] = useState({});
   const [recentPosts, setRecentPosts] = useState(null);
 
-  console.log(post);
-  console.log(postAuthor);
-
   useEffect(() => {
     const fetchPost = async () => {
       try {

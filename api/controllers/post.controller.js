@@ -1,12 +1,12 @@
 import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/error.js";
 
-export const create = async (req, res, next) => {
+export const createPost = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return next(errorHandler(403, "You are not allowed to create a post"));
   }
 
-  if (!req.body.title || !req.body.content) {
+  if (!req.body.title || !req.body.content || !req.body.category) {
     return next(errorHandler(400, "Please, provide all required fields"));
   }
   const slug = req.body.title
@@ -37,6 +37,7 @@ export const getposts = async (req, res, next) => {
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.slug && { slug: req.query.slug }),
       ...(req.query.postId && { _id: req.query.postId }),
+      ...(req.query.category && { category: req.query.category }),
       ...(req.query.searchTerm && {
         $or: [
           { title: { $regex: req.query.searchTerm, $options: "i" } },
@@ -67,7 +68,7 @@ export const getposts = async (req, res, next) => {
 };
 
 export const deletepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  if (!req.user.isAdmin && req.user.id !== req.params.userId) {
     return next(errorHandler(403, "YOu are not allowed to delete this post"));
   }
   try {
@@ -81,7 +82,7 @@ export const deletepost = async (req, res, next) => {
 };
 
 export const updatepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  if (!req.user.isAdmin && req.user.id !== req.params.userId) {
     return next(errorHandler(403, "You are not allowed to update this post"));
   }
 
@@ -92,6 +93,7 @@ export const updatepost = async (req, res, next) => {
         $set: {
           title: req.body.title,
           content: req.body.content,
+          category: req.body.category,
           image: req.body.image,
         },
       },
