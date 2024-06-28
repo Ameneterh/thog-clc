@@ -141,7 +141,7 @@ export default function Header() {
           <Navbar.Link active={path === "/contact-us"} as={"div"}>
             <Link
               to="/contact-us"
-              className="border border-gray-500 p-2 rounded-lg hover:bg-slate-600 hover:text-white"
+              className="md:border md:border-gray-500 md:p-2 rounded-lg hover:bg-slate-600 hover:text-white"
             >
               Contact Us
             </Link>
