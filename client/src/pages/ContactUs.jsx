@@ -67,7 +67,7 @@ export default function ContactUs() {
             <ReactQuill
               theme="snow"
               placeholder="Write your message"
-              className="h-24 mb-12"
+              className="min-h-24"
               required
               // onChange={(value) => {
               //   setFormData({ ...formData, content: value });
