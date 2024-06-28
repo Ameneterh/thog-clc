@@ -128,7 +128,7 @@ export default function Home() {
           gradientDuoTone="purpleToBlue"
           className="my-6 w-48 mx-auto"
         >
-          <Link to="#" className="w-full">
+          <Link to="/impact-missions" className="w-full">
             READ MORE ...
           </Link>
         </Button>
@@ -168,7 +168,7 @@ export default function Home() {
               <p className="flex items-start gap-2 w-full">
                 <MdOutlineDescription className="h-4 w-4" />
                 <span className="flex flex-1">
-                  A time of worship the Lord, feed on His Word and enjoy
+                  A time to worship the Lord, feed on His Word and enjoy
                   communion and fellowship with other believers.
                 </span>
               </p>

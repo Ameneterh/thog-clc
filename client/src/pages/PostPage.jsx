@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button, Spinner } from "flowbite-react";
 import CommentSection from "../components/CommentSection";
 import PostCard, { PostCardMobile } from "../components/PostCard";
+import { BiSolidCategory } from "react-icons/bi";
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -59,7 +60,7 @@ export default function PostPage() {
       <h1 className="text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl">
         {post && post.title}
       </h1>
-      <div className="flex gap-2 items-center justify-between border-t border-slate-700 pt-2 text-sm">
+      <div className="flex gap-2 items-center justify-between border-t border-slate-700 pt-2 text-sm flex-wrap">
         <div className="flex gap-2 items-center">
           <p>Posted by</p>
           <p className="font-semibold">@{postAuthor.username}</p>
@@ -73,11 +74,26 @@ export default function PostPage() {
         <div className="">{new Date(post.createdAt).toLocaleDateString()}</div>
       </div>
 
-      <img
-        src={post && post.image}
-        alt={post && post.title}
-        className="mt-2 p-3 max-h-[600px] w-full object-cover object-top"
-      />
+      <div
+        className="flex items-end h-[200px] sm:h-[600px] w-full sm:my-5"
+        style={{
+          backgroundImage: `url(${post && post.image})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="flex gap-1 items-center px-3 sm:px-5 py-1 m-1 sm:m-4">
+          <Button
+            // outline
+            // gradientDuoTone="purpleToPink"
+            className="flex items-center gap-2 text-sm sm:text-lg text-black font-extrabold rounded-md uppercase"
+          >
+            <BiSolidCategory className="text-lg" />
+            {post.category}
+          </Button>
+        </div>
+      </div>
 
       <div className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-3xl text-xs">
         <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>

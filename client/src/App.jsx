@@ -17,6 +17,8 @@ import CreatePost from "./pages/CreatePost";
 import PostPage from "./pages/PostPage";
 import UpdatePost from "./pages/UpdatePost";
 import CreateContent from "./pages/CreateContent";
+import ViewVideo from "./pages/ViewVideo";
+import ImpactMissionPage from "./pages/ImpactMissionPage";
 
 export default function App() {
   return (
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/blog-posts" element={<Blog />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/sermons" element={<Sermons />} />
+        <Route path="/impact-missions" element={<ImpactMissionPage />} />
+        <Route path="/view-video/:videoId" element={<ViewVideo />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route element={<PrivateRoutes />}>

@@ -48,3 +48,34 @@ export function PostCardMobile({ post }) {
     </div>
   );
 }
+
+// for video card
+export function VideoCard({ video }) {
+  const videoURL = `https://www.youtube.com/embed/${video.videoId}`;
+
+  return (
+    <div className="w-80 p-1 bg-slate-100 dark:bg-slate-700 rounded-xl shadow-md">
+      <div className="p-1 flex flex-col flex-1 gap-2">
+        <iframe
+          src={videoURL}
+          width="300"
+          height="280"
+          className="rounded-lg"
+        ></iframe>
+
+        <div className="flex gap-2">
+          <div className="flex w-10 h-10 rounded-full bg-black"></div>
+          <div className="flex-1">
+            <Link
+              to={`/view-video/${video._id}`}
+              className="text-md line-clamp-1"
+            >
+              {video.videotitle}
+            </Link>
+            <span className="italic text-sm">Category: {video.category}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

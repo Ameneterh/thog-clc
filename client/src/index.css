@@ -11,13 +11,13 @@ body {
   --tw-ring-opacity: 0 !important;
 }
 
-:root {
+/* :root {
   font-family: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  /* background-color: #f7f7f7; */
+  background-color: #f7f7f7;
   font-synthesis: none;
-}
+} */
 
 .ql-editor {
   font-size: 1.05rem;
@@ -88,4 +88,10 @@ body {
 
 .typeWriterText {
   color: yellow;
+}
+
+#myIframe {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }

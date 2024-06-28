@@ -133,13 +133,18 @@ export default function Header() {
             <Link to="/about">About</Link>
           </Navbar.Link>
           <Navbar.Link active={path === "/sermons"} as={"div"}>
-            <Link to="/sermons">Sermons</Link>
+            <Link to="/sermons">Videos/Audio</Link>
           </Navbar.Link>
           <Navbar.Link active={path === "/blog-posts"} as={"div"}>
             <Link to="/blog-posts">Blog Posts</Link>
           </Navbar.Link>
           <Navbar.Link active={path === "/contact-us"} as={"div"}>
-            <Link to="/contact-us">Contact Us</Link>
+            <Link
+              to="/contact-us"
+              className="border border-gray-500 p-2 rounded-lg hover:bg-slate-600 hover:text-white"
+            >
+              Contact Us
+            </Link>
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>

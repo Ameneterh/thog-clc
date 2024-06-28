@@ -9,8 +9,6 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
   const [showMore, setShowMore] = useState(false);
 
-  console.log(posts);
-
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch(`/api/post/getposts?limit=10`);
@@ -75,7 +73,7 @@ export default function Blog() {
                       {new Date(post.updatedAt).toLocaleDateString()}
                     </Table.Cell>
                     <Table.Cell>
-                      <Link to={`/post/${post.slug}`}>
+                      <Link to={`/posts/${post.slug}`}>
                         <img
                           src={post.image}
                           alt={post.title}
@@ -86,7 +84,7 @@ export default function Blog() {
                     <Table.Cell>
                       <Link
                         className="font-medium text-gray-900 dark:text-white"
-                        to={`/post/${post.slug}`}
+                        to={`/posts/${post.slug}`}
                       >
                         {post.title}
                       </Link>

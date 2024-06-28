@@ -50,6 +50,7 @@ export default function CommentSection({ postId }) {
         setCommentError(null);
         setComments([data, ...comments]);
         setIsSubmitting(false);
+        window.location.reload();
       }
     } catch (error) {
       setCommentError(error.message);
@@ -123,6 +124,7 @@ export default function CommentSection({ postId }) {
       if (res.ok) {
         const data = await res.json();
         setComments(comments.filter((comment) => comment._id !== commentId));
+        window.location.reload();
       }
     } catch (error) {
       console.log(error.message);
@@ -131,13 +133,13 @@ export default function CommentSection({ postId }) {
 
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
-      <div className="text-sm my-5 flex items-center gap-1">
+      {/* <div className="text-sm my-5 flex items-center gap-1">
         <FaRegComment className="text-xl mr-2" />
         {comments.length > 0 &&
           comments.length +
             " " +
             (comments.length === 1 ? "comment" : "comments")}
-      </div>
+      </div> */}
       <Divider />
 
       {currentUser ? (
