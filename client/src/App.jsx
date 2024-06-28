@@ -19,6 +19,7 @@ import UpdatePost from "./pages/UpdatePost";
 import CreateContent from "./pages/CreateContent";
 import ViewVideo from "./pages/ViewVideo";
 import ImpactMissionPage from "./pages/ImpactMissionPage";
+import Search from "./pages/Search";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/blog-posts" element={<Blog />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/sermons" element={<Sermons />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/impact-missions" element={<ImpactMissionPage />} />
         <Route path="/view-video/:videoId" element={<ViewVideo />} />
         <Route path="/sign-up" element={<SignUp />} />
