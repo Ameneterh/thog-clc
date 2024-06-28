@@ -2,9 +2,15 @@ import React from "react";
 import contactHero from "/contact-hero.png";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { FaFacebookSquare, FaYoutubeSquare } from "react-icons/fa";
-import { Button, TextInput } from "flowbite-react";
+import {
+  FaFacebookSquare,
+  FaTwitterSquare,
+  FaInstagramSquare,
+} from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa6";
+import { Button, TextInput, Textarea } from "flowbite-react";
 import Typewriter from "typewriter-effect";
+import { Link } from "react-router-dom";
 
 export default function ContactUs() {
   return (
@@ -29,7 +35,7 @@ export default function ContactUs() {
         <div className="flex flex-col gap-6 flex-1">
           <p className="font-extrabold flex gap-2">
             Address:
-            <span className="font-normal">
+            <span className="font-normal capitalize">
               opp holy child secondary school, ado-ikere road, ajilosun,
               ado-ekiti, ekiti state, nigeria.
             </span>
@@ -37,44 +43,73 @@ export default function ContactUs() {
           <p className="font-extrabold flex gap-2">
             Contact Details:
             <span className="font-normal">
-              +2348030637978
+              <Link
+                to="tel:2348030637978"
+                className="hover:text-blue-600 hover:underline underline-offset-2"
+              >
+                +2348030637978
+              </Link>
               <br />
-              churchemailaddress@email.com
+              <Link
+                to="mailto:clcthehouseofglory1"
+                className="hover:text-blue-600 hover:underline underline-offset-2"
+              >
+                clcthehouseofglory1@email.com
+              </Link>
             </span>
           </p>
           <p className="flex gap-2 items-center">
             Find Us Here:
             <span className="flex gap-3 items-center">
-              <a href="https://youtube.com" target="_blank" rel="noreferrer">
-                <FaYoutubeSquare className="text-lg hover:scale-125 transition-all" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer">
+              <Link
+                to="https://www.youtube.com/@clcadoekiti_thehouseofglory"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaYoutube className="text-xl hover:scale-125 transition-all" />
+              </Link>
+              <Link to="https://facebook.com" target="_blank" rel="noreferrer">
                 <FaFacebookSquare className="text-lg hover:scale-125 transition-all" />
-              </a>
+              </Link>
+              <Link to="https://twitter.com" target="_blank" rel="noreferrer">
+                <FaTwitterSquare className="text-lg hover:scale-125 transition-all" />
+              </Link>
+              <Link to="https://instagram.com" target="_blank" rel="noreferrer">
+                <FaInstagramSquare className="text-lg hover:scale-125 transition-all" />
+              </Link>
             </span>
           </p>
         </div>
 
         <div className="flex flex-col flex-1">
           <p className="text-2xl font-extrabold uppercase mb-4">contact form</p>
-          <form className="flex flex-col gap-4">
-            <TextInput type="text" id="fullname" placeholder="Your Full Name" />
+          <form
+            onSubmit={(ev) => ev.target.reset()}
+            target="_blank"
+            className="flex flex-col gap-4"
+            action="https://formsubmit.co/clcthehouseofglory1@gmail.com"
+            method="POST"
+          >
+            <TextInput
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="Your Full Name"
+            />
             <TextInput
               type="email"
               id="email"
+              name="email"
               placeholder="youremail@company.com"
             />
-            <ReactQuill
-              theme="snow"
+            <Textarea
               placeholder="Write your message"
               className="min-h-24"
+              name="message"
               required
-              // onChange={(value) => {
-              //   setFormData({ ...formData, content: value });
-              // }}
             />
 
-            <Button outline type="button">
+            <Button outline type="submit">
               Submit
             </Button>
           </form>
