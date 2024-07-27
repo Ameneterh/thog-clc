@@ -51,7 +51,7 @@ export default function ContactUs() {
               </Link>
               <br />
               <Link
-                to="mailto:clcthehouseofglory1"
+                to="mailto:clcthehouseofglory1@gmail.com"
                 className="hover:text-blue-600 hover:underline underline-offset-2"
               >
                 clcthehouseofglory1@email.com
